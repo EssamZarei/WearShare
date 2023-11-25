@@ -214,8 +214,33 @@ public class WearShare {
         return false;
     }
 
-    public static boolean requestDonor(Donor reqDonor, Association headAss) {
-        // Imp
+    /*
+    // IMPORTANT
+    // The following method (requestDonor) written by Salman
+    */
+    public static boolean requestDonor(Donor reqDonor, Association headAss, int ID, int size, String type) {
+        Association temp = headAss;
+        Clothes tempClothes = new Clothes();
+        temp = (Association) temp.getNext();
+    
+        if (size <= 0) {
+            return false;
+        }
+         if (!("women".equalsIgnoreCase(type) || "men".equalsIgnoreCase(type) || "child".equalsIgnoreCase(type))) {
+            return false;
+        }
+    
+        if (temp.getHeadClothes().searchByID(ID) == null) {
+            temp.getHeadClothes().addLast(tempClothes);
+            reqDonor.addFirst(temp);
+            System.out.println(reqDonor + " "+ headAss );
+            return true;
+        }
+    
+       
+    
+       
+    
         return false;
     }
 
@@ -225,10 +250,27 @@ public class WearShare {
         return 0;
     }
 
-    public static boolean useReward(Beneficiary reqBenf, Store headStore, int storeID) {
-        // Imp
-        return false;
-    }
+    /*
+    // IMPORTANT
+    // The following method (useReward) written by Salman
+    */
+    public static boolean useReward(Beneficiary reqBenf, Store headStore, int storeID,Donor heaDonor, int ID, int points, int requiredPoints) {
+        boolean hasEnoughPoints=false;
+    
+        if(heaDonor.searchByID(ID)!=null){
+           hasEnoughPoints = points>= requiredPoints;
+           return false;
+    }   if(headStore.searchByID(storeID)==null){
+        hasEnoughPoints=points>=requiredPoints;
+        points=Math.max(0,points-requiredPoints);
+        System.out.println(reqBenf+ " "+ headStore+" "+heaDonor);
+        return true;
+       
+
+
+    }return false;
+    
+}  
 
     // HIIII
     
