@@ -135,7 +135,10 @@ public class WearShare {
 
     }
 
-
+    /*
+    // IMPORTANT
+    // The following method (multi, encryptString) written by Essam
+    */
     public static int multi(int a){
         int sum = a+2;
         return sum;
@@ -169,12 +172,17 @@ public class WearShare {
         return false;
     }
 
+    // will complete it when merge all methods
     public static void generalList() {
         
         System.out.println("");
         
     }
 
+    /*
+    // IMPORTANT
+    // The following method (beneList, storeList, assList) written by Essam
+    */
     public static void beneList(Beneficiary beneHead) {
         // Print all objects in the list
         System.out.println(User.toStringAll(beneHead) + "\n\n");
@@ -196,7 +204,6 @@ public class WearShare {
     // The following method (requestBenf) written by Muhanned
     */
     public static boolean requestBenf(Beneficiary reqBenf, Association headAss, int clotheID) {
-        // Imp
         
         if (headAss.getHeadClothes().searchByID(clotheID) != null) {
 
@@ -237,18 +244,9 @@ public class WearShare {
             return true;
         }
     
-       
-    
-       
-    
         return false;
     }
 
-    // public static int ML(BufferedImage image)
-    public static int ML(int num) {
-        // Imp
-        return 0;
-    }
 
     /*
     // IMPORTANT
