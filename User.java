@@ -25,6 +25,10 @@ public class User {
         this.next = null;
     }
 
+    /*
+    // IMPORTANT
+    // The following method (login) written by Muhanned
+    */
     // Checking username & password
     public boolean login(User UserHead, String userName, String password) {  
         User temp = UserHead;
