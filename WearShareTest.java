@@ -80,7 +80,7 @@ public class WearShareTest {
     }
 
     @Test
-    public void testLogIn() {
+    public void LogInTest() {
 
         Association assHead = new Association();
 
