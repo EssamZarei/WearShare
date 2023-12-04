@@ -1,0 +1,168 @@
+import java.util.*;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+public class WearShare {
+    public static void main(String[] args) throws NoSuchAlgorithmException {
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("Enter your password");
+        String pass = in.nextLine();
+        String encPass = encryptString(pass);
+        System.out.println("Your encrypted password is: " + encPass);
+
+        // Object initialization
+        // User userHead = new User();
+        Beneficiary beneHead = new Beneficiary();
+        Store storeHead = new Store();
+        Donor donorHead = new Donor();
+        Association assHead = new Association();
+
+        // Creating Beneficiary objects
+        Beneficiary bene1 = new Beneficiary(2, "Ali Mohammed", encryptString("pass1"), "Riyadh", "0512345678", 70, 170, 42.5, null);
+        Beneficiary bene2 = new Beneficiary(3, "Mohammed Ali", encryptString("pass2"), "Jeddah", "0598765432", 80, 175, 40.0, null);
+        Beneficiary bene3 = new Beneficiary(4, "Ahmed Khalid", encryptString("pass3"), "Dammam", "0555555555", 60, 160, 38.5, null);
+        // Adding beneficiaries
+        beneHead.addLast(bene1);
+        beneHead.addLast(bene2);
+        beneHead.addLast(bene3);
+
+        // Creating Store objects
+        Store store1 = new Store(2, "Perfume Shop", encryptString("pass1"), "Jeddah", "0502345678", "50", "StCode2");
+        Store store2 = new Store(3, "Furniture Store", encryptString("pass2"), "Dammam", "0503456789", "50", "StCode3");
+        Store store3 = new Store(4, "Knowledge Bookstore", encryptString("pass3"), "Medina", "0504567890", "50", "StCode4");
+        Store store4 = new Store(5, "Farouq Supermarket", encryptString("pass4"), "Taif", "0505678901", "50", "StCode5");
+
+        // Adding stores
+        storeHead.addLast(store1);
+        storeHead.addLast(store2);
+        storeHead.addLast(store3);
+        storeHead.addLast(store4);
+
+        // Creating Donor objects
+        Donor donor1 = new Donor(2, "Mariam Abdullah", encryptString("pass1"), "Jeddah", "0502222222");
+        Donor donor2 = new Donor(3, "Mohammed Sulaiman", encryptString("pass2"), "Dammam", "0503333333");
+        Donor donor3 = new Donor(4, "Layla Mohammed", encryptString("pass3"), "Medina", "0504444444");
+        Donor donor4 = new Donor(5, "Sara Ali", encryptString("pass4"), "Khobar", "0505555555");
+
+        // Adding donors
+        donorHead.addLast(donor1);
+        donorHead.addLast(donor2);
+        donorHead.addLast(donor3);
+        donorHead.addLast(donor4);
+        // Creating Association objects
+        Association ass1 = new Association(2, "Ass1", encryptString("pass1"), "Jeddah", "0502222222");
+        Association ass2 = new Association(3, "Ass2", encryptString("pass2"), "Dammam", "0503333333");
+        Association ass3 = new Association(4, "Ass3", encryptString("pass3"), "Medina", "0504444444");
+        Association ass4 = new Association(5, "Ass4", encryptString("pass4"), "Khobar", "0505555555");
+
+        // Adding associations
+        assHead.addLast(ass1);
+        assHead.addLast(ass2);
+        assHead.addLast(ass3);
+        assHead.addLast(ass4);
+
+        // Adding Clothes to each Association
+        // For Association 1
+        ass1.getHeadClothes().addLast(new Clothes(101, "Men", 40));
+        ass1.getHeadClothes().addLast(new Clothes(102, "Women", 36));
+
+        // For Association 2
+        ass2.getHeadClothes().addLast(new Clothes(201, "Child", 30));
+        ass2.getHeadClothes().addLast(new Clothes(202, "Men", 42));
+
+        // For Association 3
+        ass3.getHeadClothes().addLast(new Clothes(301, "Women", 38));
+        ass3.getHeadClothes().addLast(new Clothes(302, "Child", 32));
+
+        // For Association 4
+        ass4.getHeadClothes().addLast(new Clothes(401, "Men", 44));
+        ass4.getHeadClothes().addLast(new Clothes(402, "Women", 34));
+        
+        // User interaction
+        System.out.println("-----------------------          WELCOME TO WearShare              -----------------------\n ");
+        System.out.print("Choose: 1 if you are Association, 2 if you are Beneficiary, 3 if you are Donor: ");
+        int TypeOfUser = in.nextInt();
+        in.nextLine(); // Consume the leftover newline
+        System.out.println("Please enter your username and your password\n");
+        System.out.print("  User Name: ");
+        String Username = in.nextLine();
+        System.out.print("  Password: ");
+        String password = in.nextLine();
+
+        // User authentication and interaction
+        switch(TypeOfUser) {
+            case 1:
+                // Association specific code
+                break;
+            case 2:
+                // Beneficiary specific code
+                break;
+            case 3:
+                // Donor specific code
+                break;
+            default:
+                System.out.println("Invalid user type selected.");
+        }
+
+        // Close scanner
+        in.close();
+    } // End of main method
+
+    // The rest of the WearShare class with method implementations
+
+    // Method for encrypting a string
+    public static String encryptString(String text) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] messageDigest = md.digest(text.getBytes());
+        BigInteger no = new BigInteger(1, messageDigest);
+        return no.toString(16);
+    }
+
+    // Method for user login
+    public static boolean logIn(User user, String userName, String password) {
+        // Implement login logic
+        return true; // Placeholder return value
+    }
+
+    // Method to list beneficiaries
+    public static void beneList(Beneficiary beneHead) {
+        // Implement beneficiary listing logic
+    }
+
+    // Method to list stores
+    public static void storeList(Store storeHead) {
+        // Implement store listing logic
+    }
+
+    // Method to list associations
+    public static void assList(Association assHead) {
+        // Implement association listing logic
+    }
+
+    // Method for beneficiary requests
+    public static boolean requestBenf(Beneficiary reqBenf, Association headAss, int clotheID) {
+        // Implement beneficiary request logic
+        return true; // Placeholder return value
+    }
+
+    // Method for donor requests
+    public static boolean requestDonor(Donor reqDonor, Association headAss, int ID, int size, String type) {
+        // Implement donor request logic
+        return true; // Placeholder return value
+    }
+
+    // Method to use rewards
+    public static boolean useReward(Beneficiary reqBenf, Store headStore, int storeID, Donor headDonor, int ID, int points, int requiredPoints) {
+        // Implement reward usage logic
+        return true; // Placeholder return value
+    }
+
+    // Any other additional methods you might have
+}
+
+// End of the WearShare class
+
+
+

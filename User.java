@@ -33,7 +33,8 @@ public class User {
     public boolean login(User UserHead, String userName, String password) {  
         User temp = UserHead;
             while (temp != null) {
-                if (temp.getName() == userName && temp.getPassword() == password) {
+                if (temp.getName().equalsIgnoreCase(userName) && temp.getPassword().equals(password)) {
+                System.out.println("Your ID is: " + temp.getID());
                 return true;
             }
             temp = temp.getNext();
@@ -124,13 +125,13 @@ public class User {
 
 // Print header with attribute names
 public static String toStringHeader() {
-    return "ID\tName\tPassword\tLocation\tPhone Number\tAdditional Info\tNext User";
+    return "ID\tName\tLocation\tPhone Number\tAdditional Info\tNext User";
 }
 
 // Print data for the current object
 @Override
 public String toString() {
-    return ID + "\t" + name + "\t" + password + "\t" + location + "\t" + phoneNumber + "\t" + info + "\t" + (next != null ? next.getName() : "None");
+    return ID + "\t" + name + "\t" + location + "\t" + phoneNumber + "\t" + info + "\t" + (next != null ? next.getName() : "None");
 }
 
 // Print all objects in the list

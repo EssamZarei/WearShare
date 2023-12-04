@@ -1,5 +1,6 @@
 public class Association extends User{
     // Class fields
+    Association nextt;
     private Clothes headClothes;
 
     // Constructor
@@ -11,6 +12,8 @@ public class Association extends User{
         super(ID, name, password, location, phoneNumber);
         this.headClothes = new Clothes();
     }
+
+
 
     // Print association information
     @Override
