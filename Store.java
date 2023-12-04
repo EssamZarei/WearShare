@@ -17,8 +17,7 @@ public class Store extends User{
     @Override
     public String toString() {
         return super.toString() + "\t" +
-                "Promotions: " + promotions + "\t" +
-                "Code: " + code;
+                "Promotions: " + promotions + "\t" ;
     }
 
 
