@@ -1,7 +1,6 @@
 
 import java.util.*;
 
-
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -263,41 +262,58 @@ public class WearShare {
      * // IMPORTANT
      * // The following method (multi, encryptString) written by Essam
      */
-    public static int multi(int a) {
-        int sum = a + 2;
-        return sum;
-    }
+    // Define a static method named 'multi' which takes an integer 'a' as input and returns an integer.
+public static int multi(int a) {
+    // Add 2 to the input integer 'a' and store the result in the variable 'sum'.
+    int sum = a + 2;
+    // Return the value of 'sum'.
+    return sum;
+}
 
-    public static String encryptString(String text) throws NoSuchAlgorithmException {
-        MessageDigest MD = MessageDigest.getInstance("MD5");
+// Define a static method named 'encryptString' which takes a String 'text' as input and returns a String.
+// This method declares that it can throw a NoSuchAlgorithmException, which must be handled by the caller.
+public static String encryptString(String text) throws NoSuchAlgorithmException {
+    // Create a MessageDigest instance for MD5 hashing.
+    MessageDigest MD = MessageDigest.getInstance("MD5");
 
-        byte[] massageDigest = MD.digest(text.getBytes());
+    // Convert the input text to a byte array and compute its digest (hash).
+    byte[] massageDigest = MD.digest(text.getBytes());
 
-        BigInteger bigInteger = new BigInteger(1, massageDigest);
+    // Convert the byte array of the hash into a positive BigInteger.
+    BigInteger bigInteger = new BigInteger(1, massageDigest);
 
-        return bigInteger.toString(16);
-    }
+    // Convert the BigInteger to a hexadecimal string and return it.
+    return bigInteger.toString(16);
+}
+
 
     /*
      * // IMPORTANT
      * // The following method (logIn) written by Muhanned
      */
-    public static boolean logIn(User check, String userName, String password) {
-        if (check.login(check, userName, password)) {
-            System.out.println(" welcome    " + userName);
-            return true;
-        } else {
-            System.out.println(" please check you name or you password ");
+    // Define a static method named 'logIn' which returns a boolean value.
+    // It takes three parameters: a User object 'check', and two strings 'userName' and 'password'.
 
-        }
-        return false;
+    public static boolean logIn(User check, String userName, String password) {
+    // Call the login method on the 'check' object with the provided username and password.
+    // If the login is successful (returns true),
+    if (check.login(check, userName, password)) {
+        // Print a welcome message with the user's name.
+        System.out.println(" welcome    " + userName);
+        // Return true indicating a successful login.
+        return true;
+    } else {
+        // If login fails, print an error message asking to check the username or password.
+        System.out.println(" please check you name or you password ");
     }
+    // Return false indicating the login was not successful.
+    return false;
+}
+
 
     // will complete it when merge all methods
     public static void generalList() {
-
         System.out.println("");
-
     }
 
     /*
@@ -319,78 +335,119 @@ public class WearShare {
         System.out.println(User.toStringAll(assHead) + "\n\n");
     }
 
-    /*
-     * // IMPORTANT
-     * // The following method (requestBenf) written by Muhanned
-     */
-    public static boolean requestBenf(Beneficiary reqBenf, Association headAss, int clotheID) {
+    
+    // IMPORTANT
+    // The following method (requestBenf) written by Muhanned
+    // Define a static method named 'requestBenf' that returns a boolean value.
+    // This method takes a Beneficiary object 'reqBenf', an Association object 'headAss', and an integer 'clotheID' as parameters.
+public static boolean requestBenf(Beneficiary reqBenf, Association headAss, int clotheID) {
 
-        if (headAss.getHeadClothes().searchByID(clotheID) != null) {
-            int ID =headAss.getHeadClothes().searchByID(clotheID).getID();
-           String Type =headAss.getHeadClothes().searchByID(clotheID).getType(); 
-           double  Size =  headAss.getHeadClothes().searchByID(clotheID).getSize();
+    // Check if the clothing item with the specified ID exists in the association's inventory.
+    if (headAss.getHeadClothes().searchByID(clotheID) != null) {
+        // Retrieve and store the ID of the clothing item.
+        int ID = headAss.getHeadClothes().searchByID(clotheID).getID();
+        // Retrieve and store the Type of the clothing item.
+        String Type = headAss.getHeadClothes().searchByID(clotheID).getType(); 
+        // Retrieve and store the Size of the clothing item.
+        double Size = headAss.getHeadClothes().searchByID(clotheID).getSize();
 
-            reqBenf.getHeadClothes().addFirst(new Clothes(ID,Type ,Size));
+        // Add the found clothing item to the beginning of the beneficiary's clothing list.
+        reqBenf.getHeadClothes().addFirst(new Clothes(ID, Type, Size));
 
-            headAss.getHeadClothes().removeItem(headAss.getHeadClothes().searchByID(clotheID));
-            System.out.println("    You got your request :)    ");
-            return true;
-        } else {
+        // Remove the clothing item from the association's inventory.
+        headAss.getHeadClothes().removeItem(headAss.getHeadClothes().searchByID(clotheID));
+        // Print a confirmation message indicating the request was successful.
+        System.out.println("    You got your request :)    ");
+        // Return true indicating the request was fulfilled successfully.
+        return true;
+    } else {
+        // If the clothing item is not found, print an error message.
+        System.out.println("    You have a problem with your request :(    ");
+    }
+    // Return false indicating the request was not fulfilled.
+    return false;
+}
 
-            System.out.println("    You have a problem with your request :(    ");
-        }
+
+    
+    // IMPORTANT
+    // The following method (requestDonor) written by Salman
+// Define a static method named 'requestDonor' that returns a boolean value.
+// This method takes a Donor object 'reqDonor', an Association object 'headAss', 
+// and three parameters 'ID', 'size', and 'type' for the clothes to be donated.
+public static boolean requestDonor(Donor reqDonor, Association headAss, int ID, int size, String type) {
+    // Create a temporary Association object and assign it the value of headAss.
+    Association temp = headAss;
+    // Create a new Clothes object with default values.
+    Clothes tempClothes = new Clothes();
+    // Move to the next Association in the linked list (if any).
+    temp = (Association) temp.getNext();
+
+    // Check if the size is less than or equal to 0, return false if it is.
+    if (size <= 0) {
         return false;
     }
 
-    /*
-     * // IMPORTANT
-     * // The following method (requestDonor) written by Salman
-     */
-    public static boolean requestDonor(Donor reqDonor, Association headAss, int ID, int size, String type) {
-        Association temp = headAss;
-        Clothes tempClothes = new Clothes();
-        temp = (Association) temp.getNext();
+    // Check if the type of clothes is not one of the specified categories ('women', 'men', 'child').
+    // If it's not one of these types, return false.
+    if (!("women".equalsIgnoreCase(type) || "men".equalsIgnoreCase(type) || "child".equalsIgnoreCase(type))) {
+        return false;
+    }
 
-        if (size <= 0) {
-            return false;
-        }
-        if (!("women".equalsIgnoreCase(type) || "men".equalsIgnoreCase(type) || "child".equalsIgnoreCase(type))) {
-            return false;
-        }
+    // Check if the clothes with the given ID already exist in the association's inventory.
+    if (temp.getHeadClothes().searchByID(ID) == null) {
+        // If the clothes don't exist, add the new clothes item to the end of the association's clothes list.
+        temp.getHeadClothes().addLast(tempClothes);
+        // Add the association to the beginning of the donor's list.
+        reqDonor.addFirst(temp);
+        // Print a thank you message indicating successful coordination.
+        System.out.println("We added the clothes thanks for your cordination :)");
+    }
+    // Return true indicating the process was successful.
+    return true;
+}
 
-        if (temp.getHeadClothes().searchByID(ID) == null) {
-            temp.getHeadClothes().addLast(tempClothes);
-            reqDonor.addFirst(temp);
-            System.out.println("We added the clothes thanks for your cordination :)");
-        }
 
+    
+    // IMPORTANT
+    // The following method (useReward) written by Salman
+// Define a static method named 'useReward' that returns a boolean value.
+// This method manages the use of rewards in a store by a donor.
+// It takes a Store object 'headStore', store and donor IDs, and point values as parameters.
+public static boolean useReward(Store headStore, int storeID, Donor heaDonor, int ID, int points, int requiredPoints) {
+    // Variable to check if the donor has enough points.
+    boolean hasEnoughPoints = false;
+
+    // Check if the donor with the given ID exists. If not, return false.
+    if (heaDonor.searchByID(ID) == null) {
+        // Set 'hasEnoughPoints' based on whether the donor has more or equal points than required.
+        hasEnoughPoints = points >= requiredPoints;
+        return false;
+    }
+
+    // Check if the store with the given ID exists.
+    if (headStore.searchByID(storeID) != null) {
+        // Set 'hasEnoughPoints' based on whether the donor has more or equal points than required.
+        hasEnoughPoints = points >= requiredPoints;
+        // Deduct the required points from the donor's total points, ensuring it doesn't go below zero.
+        points = Math.max(0, points - requiredPoints);
+        // Retrieve the user object corresponding to the store ID.
+        User userObj = headStore.searchByID(storeID);
+        // Cast the user object to a Store object.
+        Store storeObj = (Store) userObj;
+        // Print the store's code.
+        System.out.println("\n\nStore code : " + storeObj.getCode());
+        // Return true indicating the process was successful.
         return true;
     }
+    // Return false if the store with the given ID does not exist.
+    return false;
+}
 
-    /*
-     * // IMPORTANT
-     * // The following method (useReward) written by Salman
-     */
-    public static boolean useReward(Store headStore, int storeID, Donor heaDonor, int ID, int points,int requiredPoints) {
-        boolean hasEnoughPoints = false;
-
-        if (heaDonor.searchByID(ID) == null) {
-            hasEnoughPoints = points >= requiredPoints;
-            return false;
-        }
-        if (headStore.searchByID(storeID) != null) {
-            hasEnoughPoints = points >= requiredPoints;
-            points = Math.max(0, points - requiredPoints);
-            User userObj = headStore.searchByID(storeID);
-            Store storeObj = (Store) userObj;
-            System.out.println("\n\nStore code : " + storeObj.getCode());
-            return true;
-
-        }
-        return false;
-
-    }
 
     // HIIII
 
 }
+
+
+

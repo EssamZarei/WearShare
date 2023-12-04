@@ -162,7 +162,7 @@ public class WearShareTest {
          Donor  donor1 = new Donor(2, "Mariam Abdullah", "pass1", "Jeddah", "0502222222");
          donorhead.addLast(donor1);
      
-         assertEquals(WearShare.useReward((Beneficiary) beneHead.getNext(), (Store) storeHead.getNext(), 20, (Donor)donorhead.getNext(), 1, 30, 10),true);
+         assertEquals(WearShare.useReward((Store) storeHead.getNext(), 20, (Donor)donorhead.getNext(), 1, 30, 10),true);
      
      
      
